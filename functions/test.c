@@ -3,5 +3,5 @@
 void string(char* str, char** base){
 
 char* s = malloc(sizeof(str));
-strcpy(s,str);
+*base =strcpy(s,str);
 }
