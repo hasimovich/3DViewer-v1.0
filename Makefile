@@ -6,7 +6,7 @@ ifeq ($(OS), Linux)
 	LIBS +=  -lsubunit
 endif
 
-all: clean s21_math.a
+all: clean t
 deafult: all
 
 clean: 
@@ -18,11 +18,16 @@ s21_math.a: functions/*.c
 	ar crs s21_math.a *.o
 	rm -rf *.o
 
+t: clean 
+	$(eval FLAGS=-Wall -Werror -Wextra -std=c11 --coverage)
+	gcc $(FLAGS) -g -o s21 main.c functions/*.c  $(LIBS) 
+	./s21
 
 test: clean s21_math.a
 	$(eval FLAGS=-Wall -Werror -Wextra -std=c11 --coverage)
 	gcc $(FLAGS) -g -o s21_test s21_test.c functions/*.c tests/*.c $(LIBS) 
 	./s21_test 
+
 test_lib: clean s21_math.a
 	$(eval LIBS += s21_math.a)
 	gcc $(FLAGS) -g -o s21_test s21_test.c tests/*.c $(LIBS) 

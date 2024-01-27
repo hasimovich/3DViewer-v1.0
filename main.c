@@ -1,8 +1,10 @@
 #include "s21_3DViewer.h"
 
-int main(){
-char* s;
-string("tss",&s);
-    printf("h-%s-ello",s);
-    return 0;
+int main() {
+  // char* s = "ttt";
+  char* path = "ob.obj";
+  vertex ver = {0};
+  obj_to_viewer(path, &ver);
+  // printf("%d", *ver->f);
+  return 0;
 }
