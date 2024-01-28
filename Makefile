@@ -21,7 +21,7 @@ s21_math.a: functions/*.c
 t: clean 
 	$(eval FLAGS=-Wall -Werror -Wextra -std=c11 --coverage)
 	gcc $(FLAGS) -g -o s21 main.c functions/*.c  $(LIBS) 
-	./s21
+	./s21ch
 
 test: clean s21_math.a
 	$(eval FLAGS=-Wall -Werror -Wextra -std=c11 --coverage)

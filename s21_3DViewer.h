@@ -10,3 +10,4 @@ typedef struct s21_3DViewer {
 
 void string(char* str, char** base);
 void obj_to_viewer(char* obj, vertex* ver);
+void setFValue(vertex* ver, int value, int poz);
