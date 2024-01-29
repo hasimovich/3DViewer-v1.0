@@ -5,7 +5,8 @@ int main() {
   // char* path = "ob.obj";
   vertex ver = {0};
   initializeVertex(&ver);
-  setFValue(&ver, 22, 0);
+  setFValue(&ver, 22);
+  setFValue(&ver, 19);
   //*(ver.f) = 222;
   //   obj_to_viewer(path, &ver);
   printf("%d", *ver.f);

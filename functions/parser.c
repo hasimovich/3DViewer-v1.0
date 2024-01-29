@@ -17,25 +17,25 @@ void obj_to_viewer(char* obj, vertex* ver) {
   }
 }
 
-void setFValue(vertex* ver, int value, int poz) {
-  // Выделение памяти для int и присвоение значения
-  if (poz == 0) {
-    ver->f = (int*)malloc(sizeof(int));
-    *(ver->f + poz) = value;
-  } else {
-    ver->f = (int*)realloc(ver->f, sizeof(ver->f) + sizeof(int));
+void setFValue(vertex* ver, int value) {
+  // Проверка указателей на нулевое значение
+  if (ver == NULL || ver->f == NULL) {
+    return;
   }
+
+  int size = sizeof(*ver->f) / sizeof(int);
+
+  ver->f = (int*)realloc(ver->f, (size + 1) * sizeof(int));
+  *(ver->f + size) = value;
 }
 
 void initializeVertex(vertex* ver) {
   // Инициализация массива v
   for (int i = 0; i < 2; ++i) {
-    for (int j = 0; j < 2; ++j) {
-      ver->v[i][j] = malloc(sizeof(float));
-      if (ver->v[i][j] == NULL) {
-        // Обработка ошибки выделения памяти
-        exit(EXIT_FAILURE);
-      }
+    *ver->v[i] = malloc(sizeof(float));
+    if (ver->v[i] == NULL) {
+      // Обработка ошибки выделения памяти
+      exit(EXIT_FAILURE);
     }
   }
 
