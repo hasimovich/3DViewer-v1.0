@@ -4,7 +4,7 @@
 #include <string.h>
 
 typedef struct s21_3DViewer {
-  float* v[2][2];
+  float* v[2];
   int* f;
 } vertex;
 

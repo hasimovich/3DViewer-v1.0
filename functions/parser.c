@@ -24,15 +24,23 @@ void setFValue(vertex* ver, int value) {
   }
 
   int size = sizeof(*ver->f) / sizeof(int);
-
+if (size==1)
+{
+  ver->f = (int*)realloc(ver->f, (size + 1) * sizeof(int));
+ *(ver->f) = value;
+size = sizeof(*ver->f) / sizeof(int);
+printf("--%d--\n",size);
+}
+else{
   ver->f = (int*)realloc(ver->f, (size + 1) * sizeof(int));
   *(ver->f + size) = value;
+}
 }
 
 void initializeVertex(vertex* ver) {
   // Инициализация массива v
   for (int i = 0; i < 2; ++i) {
-    *ver->v[i] = malloc(sizeof(float));
+    ver->v[i] = (float*)malloc(sizeof(float));
     if (ver->v[i] == NULL) {
       // Обработка ошибки выделения памяти
       exit(EXIT_FAILURE);
