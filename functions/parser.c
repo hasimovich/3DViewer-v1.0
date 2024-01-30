@@ -8,32 +8,37 @@ void obj_to_viewer(char* obj, vertex* ver) {
     printf("file \"%s\", can't open!\n", path);
   } else {
     char p[256];
-    char* s = fgets(p, sizeof(s), file);
-    printf("file \"%s\", ok!\n", s);
-
-    printf("ver \"%d\", ok!\n", ver->f[0]);
+    while (fgets(p, 256, file)!=NULL)
+  printf("%s\n", p);
+    printf("-- \"%d\"--\n", ver->f[0]);
 
     fclose(file);
   }
 }
 
-void setFValue(vertex* ver, int value) {
+void setFValue(vertex* ver, int value, int size) {
   // Проверка указателей на нулевое значение
   if (ver == NULL || ver->f == NULL) {
     return;
   }
 
-  int size = sizeof(*ver->f) / sizeof(int);
-if (size==1)
-{
-  ver->f = (int*)realloc(ver->f, (size + 1) * sizeof(int));
- *(ver->f) = value;
-size = sizeof(*ver->f) / sizeof(int);
-printf("--%d--\n",size);
+
+  ver->f = (int*)realloc(ver->f, size * sizeof(int));
+  ver->f[size-1] = value;
+
+
 }
-else{
-  ver->f = (int*)realloc(ver->f, (size + 1) * sizeof(int));
-  *(ver->f + size) = value;
+
+void setVValue(vertex* ver, float* value, int size) {
+  // Проверка указателей на нулевое значение
+  if (ver == NULL || ver->f == NULL) {
+    return;
+  }
+
+for (int i=0;i<3;i++){
+  ver->v[i] = (float*)realloc(ver->v[i], size * sizeof(float));
+  ver->v[size-1][i] = value[i];
+
 }
 }
 
