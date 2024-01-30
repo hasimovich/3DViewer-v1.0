@@ -8,9 +8,9 @@ void obj_to_viewer(char* obj, vertex* ver) {
     printf("file \"%s\", can't open!\n", path);
   } else {
     char p[256];
-    while (fgets(p, 256, file)!=NULL)
-  printf("%s\n", p);
-    printf("-- \"%d\"--\n", ver->f[0]);
+    while (fgets(p, 256, file) != NULL) {
+      parser_str(ver, p);
+    }
 
     fclose(file);
   }
@@ -22,11 +22,8 @@ void setFValue(vertex* ver, int value, int size) {
     return;
   }
 
-
   ver->f = (int*)realloc(ver->f, size * sizeof(int));
-  ver->f[size-1] = value;
-
-
+  ver->f[size - 1] = value;
 }
 
 void setVValue(vertex* ver, float* value, int size) {
@@ -35,11 +32,10 @@ void setVValue(vertex* ver, float* value, int size) {
     return;
   }
 
-for (int i=0;i<3;i++){
-  ver->v[i] = (float*)realloc(ver->v[i], size * sizeof(float));
-  ver->v[size-1][i] = value[i];
-
-}
+  for (int i = 0; i < 3; i++) {
+    ver->v[i] = (float*)realloc(ver->v[i], size * sizeof(float));
+    ver->v[size - 1][i] = value[i];
+  }
 }
 
 void initializeVertex(vertex* ver) {
@@ -58,4 +54,19 @@ void initializeVertex(vertex* ver) {
     // Обработка ошибки выделения памяти
     exit(EXIT_FAILURE);
   }
+}
+
+int parser_str(vertex* ver, char* str) {
+  int poz = 0;
+  int ex = 0;
+  while (str[poz] == ' ' || str[poz] == '\n') poz++;
+  if (str[poz] == '#') {
+    ex = 1;
+  } else if (!((str[poz] == 'v' && str[poz + 1] == ' ') || str[poz] == 'f')) {
+    ex = 2;
+  } else {
+    printf("%s", str);
+    *ver->f = 1;
+  }
+  return ex;
 }

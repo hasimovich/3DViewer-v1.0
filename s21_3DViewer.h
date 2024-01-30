@@ -13,3 +13,4 @@ void obj_to_viewer(char* obj, vertex* ver);
 void setFValue(vertex* ver, int value, int size);
 void setVValue(vertex* ver, float* value, int size);
 void initializeVertex(vertex* ver);
+int parser_str(vertex* ver, char* str);

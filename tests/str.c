@@ -7,30 +7,28 @@
 
 #include "../s21_3DViewer.h"
 
-START_TEST(str)
-{
-char* s="test";
-char* s1;
-string(s,&s1);
-for (int i=0;i<3;i++){
-ck_assert_str_eq(s,s1);
-}
+START_TEST(str) {
+  char *s = "test";
+  char *s1;
+  string(s, &s1);
+  for (int i = 0; i < 3; i++) {
+    ck_assert_str_eq(s, s1);
+  }
 }
 END_TEST
 
-int main(void)
-{
-    Suite *s1 = suite_create("Core");
-    TCase *tc1_1 = tcase_create("Core");
-    SRunner *sr = srunner_create(s1);
-    int nf;
+int main(void) {
+  Suite *s1 = suite_create("Core");
+  TCase *tc1_1 = tcase_create("Core");
+  SRunner *sr = srunner_create(s1);
+  int nf;
 
-    suite_add_tcase(s1, tc1_1);
-    tcase_add_test(tc1_1, str);
+  suite_add_tcase(s1, tc1_1);
+  tcase_add_test(tc1_1, str);
 
-    srunner_run_all(sr, CK_ENV);
-    nf = srunner_ntests_failed(sr);
-    srunner_free(sr);
+  srunner_run_all(sr, CK_ENV);
+  nf = srunner_ntests_failed(sr);
+  srunner_free(sr);
 
-    return nf == 0 ? 0 : 1;
+  return nf == 0 ? 0 : 1;
 }
