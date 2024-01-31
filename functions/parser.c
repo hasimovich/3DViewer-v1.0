@@ -16,25 +16,25 @@ void obj_to_viewer(char* obj, vertex* ver) {
   }
 }
 
-void setFValue(vertex* ver, int value, int size) {
+void setFValue(vertex* ver, int value) {
   // Проверка указателей на нулевое значение
   if (ver == NULL || ver->f == NULL) {
     return;
   }
-
-  ver->f = (int*)realloc(ver->f, size * sizeof(int));
-  ver->f[size - 1] = value;
+ver->size_f++;
+  ver->f = (int*)realloc(ver->f, ver->size_f * sizeof(int));
+  ver->f[ver->size_f - 1] = value;
 }
 
-void setVValue(vertex* ver, float* value, int size) {
+void setVValue(vertex* ver, float* value) {
   // Проверка указателей на нулевое значение
   if (ver == NULL || ver->f == NULL) {
     return;
   }
-
+ver->size_v++;
   for (int i = 0; i < 3; i++) {
-    ver->v[i] = (float*)realloc(ver->v[i], size * sizeof(float));
-    ver->v[size - 1][i] = value[i];
+    ver->v[i] = (float*)realloc(ver->v[i], ver->size_v * sizeof(float));
+    ver->v[ver->size_v - 1][i] = value[i];
   }
 }
 
@@ -54,6 +54,8 @@ void initializeVertex(vertex* ver) {
     // Обработка ошибки выделения памяти
     exit(EXIT_FAILURE);
   }
+ver->size_v=0;
+ver->size_f=0;
 }
 
 int parser_str(vertex* ver, char* str) {
@@ -65,6 +67,11 @@ int parser_str(vertex* ver, char* str) {
   } else if (!((str[poz] == 'v' && str[poz + 1] == ' ') || str[poz] == 'f')) {
     ex = 2;
   } else {
+    if (str[poz] == 'v')
+    {
+   //sscanf("v %f %f %f",);
+    }
+    
     printf("%s", str);
     *ver->f = 1;
   }
