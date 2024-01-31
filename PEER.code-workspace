@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../PEER"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stddef.h": "c",
+			"s21_dec_processing.h": "c",
+			"s21_decimal.h": "c",
+			"stdio.h": "c",
+			"limits.h": "c",
+			"stdlib.h": "c"
+		}
+	}
+}
